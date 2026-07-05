@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Page</title>
+
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+
+</head>
+<body>
+    
+   <h1 class="text-center">Contact Infomation</h1>
+
+   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam delectus quae unde ipsam sapiente dolor quod vero in, error excepturi dignissimos expedita exercitationem eveniet dolores quaerat nisi sed est illo.
+   Aut eos ut nostrum illum voluptate! Voluptas expedita explicabo incidunt quia deleniti, ad fugiat architecto quis hic omnis illo corrupti illum minima ab porro officiis repellat, necessitatibus maxime! Itaque, corrupti.
+   Amet sit ab explicabo, laudantium optio dolorem? Aspernatur quisquam, culpa reiciendis cumque voluptatem reprehenderit facere voluptatibus ullam accusamus? Impedit saepe mollitia laboriosam. Quis, similique pariatur consequuntur officia in est? Modi!</p>
+
+   <table class="table table-dark container">
+
+    <tr>
+
+        <th>Name</th>
+        <th>Email Address</th>
+        <th>Subject</th>
+        <th>Message</th>
+        <th>Action</th>
+
+    </tr>
+
+    {%for contact in all%}
+
+    <tr>
+
+        <td>{{ contact.name}}</td>
+        <td>{{ contact.email}}</td>
+        <td>{{ contact.subject }}</td>
+        <td>{{ contact.message }}</td>
+        <td>
+
+            <a href="" class="btn btn-outline-warning">Edit</a>
+
+            <a href="" class="btn btn-outline-danger">Delete</a>
+
+        </td>
+
+
+    </tr>
+
+    {%endfor%}
+
+   </table>
+</body>
+</html>

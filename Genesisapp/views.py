@@ -22,7 +22,6 @@ def home(request):
     
     else:
         return render(request, 'index.html')
-    
 
 def portfolio(request):
     return render(request, 'portfolio-details.html')
@@ -32,4 +31,9 @@ def service(request):
 
 def starter(request):
     return render(request, 'starter-page.html')
+
+def show(request):
+    all = Contact.objects.all()
+    return render (request, 'show.html', {'all':all})
+    
 
