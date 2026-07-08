@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M-Pesa Payment</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Inter, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background:linear-gradient(135deg,#f8fafc,#eef2ff);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:20px;
+        }
+
+        .payment-card{
+            width:100%;
+            max-width:420px;
+            background:#fff;
+            border-radius:20px;
+            padding:35px;
+            box-shadow:
+                0 20px 50px rgba(15,23,42,.08),
+                0 8px 20px rgba(15,23,42,.05);
+            animation:fadeIn .4s ease;
+        }
+
+        @keyframes fadeIn{
+            from{
+                opacity:0;
+                transform:translateY(15px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .logo{
+            width:65px;
+            height:65px;
+            margin:0 auto 18px;
+            border-radius:18px;
+            background:#16a34a;
+            color:white;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:26px;
+            font-weight:bold;
+        }
+
+        h2{
+            text-align:center;
+            color:#111827;
+            margin-bottom:8px;
+        }
+
+        .subtitle{
+            text-align:center;
+            color:#6b7280;
+            font-size:14px;
+            margin-bottom:30px;
+            line-height:1.6;
+        }
+
+        .form-group{
+            margin-bottom:20px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            font-size:14px;
+            font-weight:600;
+            color:#374151;
+        }
+
+        input{
+            width:100%;
+            height:52px;
+            padding:0 15px;
+            border:1px solid #d1d5db;
+            border-radius:12px;
+            font-size:15px;
+            transition:.3s;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#16a34a;
+            box-shadow:0 0 0 4px rgba(22,163,74,.15);
+        }
+
+        input[readonly]{
+            background:#f3f4f6;
+            color:#111827;
+            font-weight:600;
+        }
+
+        .pay-btn{
+            width:100%;
+            height:54px;
+            border:none;
+            border-radius:12px;
+            background:#16a34a;
+            color:#fff;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        .pay-btn:hover{
+            background:#15803d;
+            transform:translateY(-2px);
+        }
+
+        .pay-btn:active{
+            transform:translateY(0);
+        }
+
+        .secure{
+            margin-top:20px;
+            text-align:center;
+            color:#6b7280;
+            font-size:13px;
+        }
+
+        @media(max-width:480px){
+            .payment-card{
+                padding:25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-card">
+
+    <div class="logo">M</div>
+
+    <h2>Complete Payment</h2>
+
+    <p class="subtitle">
+        Enter your M-Pesa phone number to receive the payment prompt.
+    </p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="254712345678"
+                pattern="254[0-9]{9}"
+                maxlength="12"
+                autocomplete="tel"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount (KES)</label>
+
+            <input
+                type="number"
+                id="amount"
+                name="amount"
+                value="100"
+                min="1"
+                readonly>
+        </div>
+
+        <button type="submit" class="pay-btn">
+            Pay Now
+        </button>
+    </form>
+
+    <div class="secure">
+        🔒 Secure M-Pesa Payment
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,72 +1,237 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Page</title>
+    <title>Contact Records</title>
 
-    {%load static%}
-    <link rel="stylesheet" href="{%static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
-    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+    <link rel="stylesheet" href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
     <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
         body{
-            background-color: antiquewhite;
+            background:#f4f7fb;
+            font-family:Inter,"Segoe UI",sans-serif;
+            color:#1f2937;
         }
 
-        h1{
-            color: darkred;
+        .header{
+            background:linear-gradient(135deg,#0f766e,#14b8a6);
+            color:white;
+            padding:45px 0;
+            margin-bottom:35px;
+            box-shadow:0 8px 25px rgba(0,0,0,.08);
         }
 
-        h1:hover{
-            background-color: black;
-            color: azure;
+        .header h1{
+            font-weight:700;
+            margin-bottom:8px;
+        }
+
+        .header p{
+            opacity:.9;
+            margin:0;
+        }
+
+        .card{
+            border:none;
+            border-radius:18px;
+            overflow:hidden;
+            box-shadow:0 12px 30px rgba(0,0,0,.08);
+        }
+
+        .card-header{
+            background:white;
+            border-bottom:1px solid #edf2f7;
+            padding:22px;
+            font-weight:600;
+            font-size:18px;
+        }
+
+        .table{
+            margin:0;
+        }
+
+        .table thead{
+            background:#0f766e;
+            color:white;
+        }
+
+        .table thead th{
+            border:none;
+            padding:18px;
+            font-weight:600;
+            text-align:center;
+        }
+
+        .table tbody td{
+            padding:18px;
+            text-align:center;
+            vertical-align:middle;
+        }
+
+        .table tbody tr{
+            transition:.25s ease;
+        }
+
+        .table tbody tr:hover{
+            background:#f8fafc;
+        }
+
+        .btn{
+            border-radius:10px;
+            padding:8px 16px;
+            font-weight:600;
+            margin:2px;
+        }
+
+        .btn-warning{
+            color:white;
+        }
+
+        .btn-danger{
+            color:white;
+        }
+
+        .btn-success{
+            color:white;
+        }
+
+        .badge-count{
+            background:#14b8a6;
+            color:white;
+            padding:8px 14px;
+            border-radius:50px;
+            font-size:14px;
+        }
+
+        .footer{
+            text-align:center;
+            color:#6b7280;
+            margin:35px 0;
+            font-size:14px;
+        }
+
+        @media(max-width:992px){
+
+            .table-responsive{
+                overflow-x:auto;
+            }
+
+            .btn{
+                display:block;
+                width:100%;
+                margin-bottom:8px;
+            }
+
         }
     </style>
 
-
 </head>
+
 <body>
-    
-   <h1 class="text-center">Contact Infomation</h1>
 
-   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam delectus quae unde ipsam sapiente dolor quod vero in, error excepturi dignissimos expedita exercitationem eveniet dolores quaerat nisi sed est illo.
-   Aut eos ut nostrum illum voluptate! Voluptas expedita explicabo incidunt quia deleniti, ad fugiat architecto quis hic omnis illo corrupti illum minima ab porro officiis repellat, necessitatibus maxime! Itaque, corrupti.
-   Amet sit ab explicabo, laudantium optio dolorem? Aspernatur quisquam, culpa reiciendis cumque voluptatem reprehenderit facere voluptatibus ullam accusamus? Impedit saepe mollitia laboriosam. Quis, similique pariatur consequuntur officia in est? Modi!</p>
+    <div class="header">
+        <div class="container text-center">
+            <h1>Contact Management</h1>
+            <p>View, edit, delete, and manage customer enquiries.</p>
+        </div>
+    </div>
 
-   <table class="table table-dark container">
+    <div class="container">
 
-    <tr>
+        <div class="card">
 
-        <th>Name</th>
-        <th>Email Address</th>
-        <th>Subject</th>
-        <th>Message</th>
-        <th>Action</th>
+            <div class="card-header d-flex justify-content-between align-items-center">
 
-    </tr>
+                <span>All Contact Messages</span>
 
-    {%for contact in all%}
+                <span class="badge-count">
+                    {{ all|length }} Records
+                </span>
 
-    <tr>
+            </div>
 
-        <td>{{ contact.name}}</td>
-        <td>{{ contact.email}}</td>
-        <td>{{ contact.subject }}</td>
-        <td>{{ contact.message }}</td>
-        <td>
-            
-            <a href="/edit/{{contact.id}}" class="btn btn-outline-success">Edit</a>
+            <div class="table-responsive">
 
-            <a href="/delete/{{contact.id}}" class="btn btn-outline-danger">Delete</a>
+                <table class="table table-hover align-middle">
 
-        </td>
+                    <thead>
 
+                        <tr>
+                            <th>Name</th>
+                            <th>Email Address</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Actions</th>
+                        </tr>
 
-    </tr>
+                    </thead>
 
-    {%endfor%}
+                    <tbody>
 
-   </table>
+                        {% for contact in all %}
+
+                        <tr>
+
+                            <td>{{ contact.name }}</td>
+
+                            <td>{{ contact.email }}</td>
+
+                            <td>{{ contact.subject }}</td>
+
+                            <td>{{ contact.message }}</td>
+
+                            <td>
+
+                                <a href="/edit/{{ contact.id }}" class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+
+                                <a href="/delete/{{ contact.id }}" class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+
+                                <a href="{% url 'payment' %}" class="btn btn-success btn-sm">
+                                    Pay
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                No contact records found.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        Contact Management System
+    </div>
+
 </body>
 </html>
